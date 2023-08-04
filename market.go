@@ -11,6 +11,10 @@ import (
 
 //go:generate go run github.com/hannahhoward/cbor-gen-for@latest --map-encoding StorageAsk DealStatusRequest DealStatusResponse DealStatus DealParams Transfer DealResponse
 
+const (
+	FilStorageMarketProtocol_1_2_0 = "/fil/storage/mk/1.2.0"
+)
+
 // StorageAsk defines the parameters by which a miner will choose to accept or
 // reject a deal. Note: making a storage deal proposal which matches the miner's
 // ask is a precondition, but not sufficient to ensure the deal is accepted (the

@@ -5,7 +5,9 @@ import (
 	"github.com/ipfs/go-cid"
 )
 
-const FilStorageTransfer_1_0_0 = "/fil/storage/transfer/1.0.0"
+const (
+	FilStorageTransferProtocol_1_0_0 = "/fil/storage/transfer/1.0.0"
+)
 
 // HttpRequest has parameters for an HTTP transfer
 type HttpRequest struct {
