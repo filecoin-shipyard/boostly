@@ -4,7 +4,6 @@ import (
 	"github.com/filecoin-project/go-address"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/builtin/v9/market"
-	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
 )
@@ -27,43 +26,6 @@ type StorageAsk struct {
 	MinPieceSize abi.PaddedPieceSize
 	MaxPieceSize abi.PaddedPieceSize
 	Miner        address.Address
-}
-
-// DealStatusRequest is sent to get the current state of a deal from a
-// storage provider
-type DealStatusRequest struct {
-	DealUUID  uuid.UUID
-	Signature crypto.Signature
-}
-
-// DealStatusResponse is the current state of a deal
-type DealStatusResponse struct {
-	DealUUID uuid.UUID
-	// Error is non-empty if there is an error getting the deal status
-	// (eg invalid request signature)
-	Error          string
-	DealStatus     *DealStatus
-	IsOffline      bool
-	TransferSize   uint64
-	NBytesReceived uint64
-}
-
-type DealStatus struct {
-	// Error is non-empty if the deal is in the error state
-	Error string
-	// Status is a string corresponding to a deal checkpoint
-	Status string
-	// SealingStatus is the sealing status reported by lotus miner
-	SealingStatus string
-	// Proposal is the deal proposal
-	Proposal market.DealProposal
-	// SignedProposalCid is the cid of the client deal proposal + signature
-	SignedProposalCid cid.Cid
-	// PublishCid is the cid of the Publish message sent on chain, if the deal
-	// has reached the publish stage
-	PublishCid *cid.Cid
-	// ChainDealID is the id of the deal in chain state
-	ChainDealID abi.DealID
 }
 
 type DealParams struct {
