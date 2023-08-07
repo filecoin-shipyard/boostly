@@ -7,8 +7,9 @@
 
 This repository providers types and client libraries to interact with a FileCoin storage provider running Boost. It covers:
 
-* Deal making flow
+* Deal making
+* Deal status check
 * Retrieval transports query
  
 Due to the way Boost code repository is structured, it is not possible to directly depend on the Boost repo.
-This project aims to reduce barriers for integration and programmatic interaction with Boost APIs.
+This project aims to reduce barriers for programmatic interaction with Boost APIs.
