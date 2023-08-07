@@ -1,11 +1,17 @@
 package boostly
 
 import (
+	"context"
+	"fmt"
+
 	"github.com/filecoin-project/go-address"
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/builtin/v9/market"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
+	"github.com/libp2p/go-libp2p/core/host"
+	"github.com/libp2p/go-libp2p/core/peer"
 )
 
 //go:generate go run github.com/hannahhoward/cbor-gen-for@latest --map-encoding StorageAsk DealParams Transfer DealResponse
@@ -56,4 +62,38 @@ type DealResponse struct {
 	// Message is the reason the deal proposal was rejected. It is empty if
 	// the deal was accepted.
 	Message string
+}
+
+func ProposeDeal(ctx context.Context, h host.Host, spID peer.ID, params DealParams) (*DealResponse, error) {
+	stream, err := h.NewStream(ctx, spID, FilStorageMarketProtocol_1_2_0)
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = stream.Close() }()
+
+	var resp DealResponse
+	errc := make(chan error)
+	go func() {
+		defer close(errc)
+		if err := cborutil.WriteCborRPC(stream, params); err != nil {
+			errc <- fmt.Errorf("failed to send request: %w", err)
+			return
+		}
+		if err := cborutil.ReadCborRPC(stream, &resp); err != nil {
+			errc <- fmt.Errorf("failed to read response: %w", err)
+			return
+		}
+		errc <- nil
+	}()
+
+	select {
+	case err := <-errc:
+		if err != nil {
+			return nil, err
+		}
+		break
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+	return &resp, nil
 }

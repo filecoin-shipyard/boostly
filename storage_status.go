@@ -56,7 +56,7 @@ type DealStatus struct {
 	ChainDealID abi.DealID
 }
 
-func GetDealStatusRequest(ctx context.Context, h host.Host, id peer.ID, dealUUID uuid.UUID, signer func(context.Context, []byte) (*crypto.Signature, error)) (*DealStatusResponse, error) {
+func GetDealStatus(ctx context.Context, h host.Host, id peer.ID, dealUUID uuid.UUID, signer func(context.Context, []byte) (*crypto.Signature, error)) (*DealStatusResponse, error) {
 	uuidBytes, err := dealUUID.MarshalBinary()
 	if err != nil {
 		return nil, fmt.Errorf("getting uuid bytes: %w", err)
