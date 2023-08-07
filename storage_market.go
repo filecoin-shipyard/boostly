@@ -8,7 +8,7 @@ import (
 	"github.com/ipfs/go-cid"
 )
 
-//go:generate go run github.com/hannahhoward/cbor-gen-for@latest --map-encoding StorageAsk DealStatusRequest DealStatusResponse DealStatus DealParams Transfer DealResponse
+//go:generate go run github.com/hannahhoward/cbor-gen-for@latest --map-encoding StorageAsk DealParams Transfer DealResponse
 
 const (
 	FilStorageMarketProtocol_1_2_0 = "/fil/storage/mk/1.2.0"

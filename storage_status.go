@@ -5,15 +5,17 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/filecoin-project/go-cbor-util"
+	cborutil "github.com/filecoin-project/go-cbor-util"
 	"github.com/filecoin-project/go-state-types/abi"
 	"github.com/filecoin-project/go-state-types/builtin/v9/market"
 	"github.com/filecoin-project/go-state-types/crypto"
 	"github.com/google/uuid"
 	"github.com/ipfs/go-cid"
-	"github.com/libp2p/go-libp2p/core/host"
+	host "github.com/libp2p/go-libp2p/core/host"
 	"github.com/libp2p/go-libp2p/core/peer"
 )
+
+//go:generate go run github.com/hannahhoward/cbor-gen-for@latest --map-encoding DealStatusRequest DealStatusResponse DealStatus
 
 const FilStorageStatusProtocol_1_2_0 = "/fil/storage/status/1.2.0"
 
@@ -70,8 +72,7 @@ func GetDealStatusRequest(ctx context.Context, h host.Host, id peer.ID, dealUUID
 	if err != nil {
 		return nil, err
 	}
-
-	defer s.Close() // nolint
+	defer s.Close()
 
 	// Set a deadline on writing to the stream so it doesn't hang
 	_ = s.SetWriteDeadline(time.Now().Add(10 * time.Second)) // TODO parameterise

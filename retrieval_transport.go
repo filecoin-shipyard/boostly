@@ -9,12 +9,11 @@ import (
 	"github.com/ipld/go-ipld-prime/node/bindnode/registry"
 	"github.com/libp2p/go-libp2p/core/host"
 	"github.com/libp2p/go-libp2p/core/peer"
-	"github.com/libp2p/go-libp2p/core/protocol"
 	"github.com/multiformats/go-multiaddr"
 )
 
 const (
-	FilRetrievalTransportsProtocol_1_0_0 = protocol.ID("/fil/retrieval/transports/1.0.0")
+	FilRetrievalTransportsProtocol_1_0_0 = "/fil/retrieval/transports/1.0.0"
 
 	transporsIpldSchema = `
 type Multiaddr bytes
