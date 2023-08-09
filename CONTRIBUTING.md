@@ -8,12 +8,12 @@ Thank you for your interest in contributing to Boostly! Your efforts will help m
 
 2. **Clone Your Fork**: Open a terminal and run:
    ```
-   git clone https://github.com/masih/boostly.git
+   git clone https://github.com/filecoin-shipyard/boostly.git
    ```
 
 3. **Add the Upstream Remote**: This will be useful to sync your fork with the latest changes:
    ```
-   git remote add upstream https://github.com/masih/boostly.git
+   git remote add upstream https://github.com/filecoin-shipyard/boostly.git
    ```
 
 4. **Create a New Branch**: Always base your work on a new branch:
@@ -54,7 +54,7 @@ Thank you for your interest in contributing to Boostly! Your efforts will help m
 
 ## Feedback
 
-If you're unsure about any aspect of the contribution process, please open an [issue](https://github.com/masih/boostly/issues). We're here to help!
+If you're unsure about any aspect of the contribution process, please open an [issue](https://github.com/filecoin-shipyard/boostly/issues). We're here to help!
 
 ---
 

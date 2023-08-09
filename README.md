@@ -1,7 +1,7 @@
 # Boostly 
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/masih/boostly.svg)](https://pkg.go.dev/github.com/masih/boostly)
-[![Go Test](https://github.com/masih/boostly/actions/workflows/go-test.yml/badge.svg)](https://github.com/masih/boostly/actions/workflows/go-test.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/filecoin-shipyard/boostly.svg)](https://pkg.go.dev/github.com/filecoin-shipyard/boostly)
+[![Go Test](https://github.com/filecoin-shipyard/boostly/actions/workflows/go-test.yml/badge.svg)](https://github.com/filecoin-shipyard/boostly/actions/workflows/go-test.yml)
 
 > [Filecoin Boost](https://github.com/filecoin-project/boost) Client Library in Go
 
@@ -16,7 +16,7 @@ Boostly is a lightweight and efficient Go client library for [Filecoin Boost](ht
 ## Installation
 
 ```bash
-go get github.com/masih/boostly@latest
+go get github.com/filecoin-shipyard/boostly@latest
 ```
 
 ## Status
@@ -27,7 +27,7 @@ Please be aware that while we strive to keep the master branch stable, breaking 
 
 ## Documentation
 
-For detailed usage and integration guidance, please refer to [godoc documentation](https://pkg.go.dev/github.com/masih/boostly).
+For detailed usage and integration guidance, please refer to [godoc documentation](https://pkg.go.dev/github.com/filecoin-shipyard/boostly).
 
 ## Resources
 
