@@ -1,4 +1,4 @@
-module github.com/masih/boostly
+module github.com/filecoin-shipyard/boostly
 
 go 1.20
 
