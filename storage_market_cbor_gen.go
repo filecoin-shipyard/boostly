@@ -220,7 +220,7 @@ func (t *StorageAsk) UnmarshalCBOR(r io.Reader) (err error) {
 
 	return nil
 }
-func (t *DealParams) MarshalCBOR(w io.Writer) error {
+func (t *DealProposal) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
@@ -354,8 +354,8 @@ func (t *DealParams) MarshalCBOR(w io.Writer) error {
 	return nil
 }
 
-func (t *DealParams) UnmarshalCBOR(r io.Reader) (err error) {
-	*t = DealParams{}
+func (t *DealProposal) UnmarshalCBOR(r io.Reader) (err error) {
+	*t = DealProposal{}
 
 	cr := cbg.NewCborReader(r)
 
@@ -374,7 +374,7 @@ func (t *DealParams) UnmarshalCBOR(r io.Reader) (err error) {
 	}
 
 	if extra > cbg.MaxLength {
-		return fmt.Errorf("DealParams: map struct too large (%d)", extra)
+		return fmt.Errorf("DealProposal: map struct too large (%d)", extra)
 	}
 
 	var name string
@@ -718,7 +718,7 @@ func (t *Transfer) UnmarshalCBOR(r io.Reader) (err error) {
 
 	return nil
 }
-func (t *DealResponse) MarshalCBOR(w io.Writer) error {
+func (t *DealProposalResponse) MarshalCBOR(w io.Writer) error {
 	if t == nil {
 		_, err := w.Write(cbg.CborNull)
 		return err
@@ -771,8 +771,8 @@ func (t *DealResponse) MarshalCBOR(w io.Writer) error {
 	return nil
 }
 
-func (t *DealResponse) UnmarshalCBOR(r io.Reader) (err error) {
-	*t = DealResponse{}
+func (t *DealProposalResponse) UnmarshalCBOR(r io.Reader) (err error) {
+	*t = DealProposalResponse{}
 
 	cr := cbg.NewCborReader(r)
 
@@ -791,7 +791,7 @@ func (t *DealResponse) UnmarshalCBOR(r io.Reader) (err error) {
 	}
 
 	if extra > cbg.MaxLength {
-		return fmt.Errorf("DealResponse: map struct too large (%d)", extra)
+		return fmt.Errorf("DealProposalResponse: map struct too large (%d)", extra)
 	}
 
 	var name string
