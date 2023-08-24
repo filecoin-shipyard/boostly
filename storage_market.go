@@ -14,7 +14,7 @@ import (
 	"github.com/libp2p/go-libp2p/core/peer"
 )
 
-//go:generate go run github.com/hannahhoward/cbor-gen-for@latest --map-encoding StorageAsk DealParams Transfer DealResponse
+//go:generate go run github.com/hannahhoward/cbor-gen-for@latest --map-encoding StorageAsk DealProposal Transfer DealProposalResponse
 
 const (
 	FilStorageMarketProtocol_1_2_0 = "/fil/storage/mk/1.2.0"
@@ -34,7 +34,7 @@ type StorageAsk struct {
 	Miner        address.Address
 }
 
-type DealParams struct {
+type DealProposal struct {
 	DealUUID           uuid.UUID
 	IsOffline          bool
 	ClientDealProposal market.ClientDealProposal
@@ -57,25 +57,25 @@ type Transfer struct {
 	Size uint64
 }
 
-type DealResponse struct {
+type DealProposalResponse struct {
 	Accepted bool
 	// Message is the reason the deal proposal was rejected. It is empty if
 	// the deal was accepted.
 	Message string
 }
 
-func ProposeDeal(ctx context.Context, h host.Host, spID peer.ID, params DealParams) (*DealResponse, error) {
+func ProposeDeal(ctx context.Context, h host.Host, spID peer.ID, proposal DealProposal) (*DealProposalResponse, error) {
 	stream, err := h.NewStream(ctx, spID, FilStorageMarketProtocol_1_2_0)
 	if err != nil {
 		return nil, err
 	}
 	defer func() { _ = stream.Close() }()
 
-	var resp DealResponse
+	var resp DealProposalResponse
 	errc := make(chan error)
 	go func() {
 		defer close(errc)
-		if err := cborutil.WriteCborRPC(stream, params); err != nil {
+		if err := cborutil.WriteCborRPC(stream, proposal); err != nil {
 			errc <- fmt.Errorf("failed to send request: %w", err)
 			return
 		}
